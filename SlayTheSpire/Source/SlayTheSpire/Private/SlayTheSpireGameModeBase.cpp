@@ -3,3 +3,7 @@
 
 #include "SlayTheSpire/Public/SlayTheSpireGameModeBase.h"
 
+ASlayTheSpireGameModeBase::ASlayTheSpireGameModeBase()
+{
+	DefaultPawnClass = nullptr;
+}

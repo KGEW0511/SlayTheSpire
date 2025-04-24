@@ -13,5 +13,7 @@ UCLASS()
 class SLAYTHESPIRE_API ASlayTheSpireGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	ASlayTheSpireGameModeBase();
 };

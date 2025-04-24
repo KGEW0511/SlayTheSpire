@@ -28,9 +28,18 @@ public:
 	void CardShuffle();
 
 	UFUNCTION()
-	void CardDraw();
+	void CardDrow();
+
+	UFUNCTION()
+	void AddCard(int32 index);
+
+	UFUNCTION()
+	void UseCard(int32 index);
+
+	UFUNCTION()
+	void RemoveCard(int32 index);
 	
-	TList<int32> DeckCardList;
-	TList<int32> HandCardList;
-	TList<int32> DiscardCardList;
+	TArray<int32> DeckCards;
+	TArray<int32> HandCards;
+	TArray<int32> DiscardCards;
 };
