@@ -42,4 +42,15 @@ public:
 	TArray<int32> DeckCards;
 	TArray<int32> HandCards;
 	TArray<int32> DiscardCards;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* AttackCardTexture;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* ShieldCardTexture;
+	
+	TMap<int32, UTexture2D*> CardDictionary;
+
+	UFUNCTION(BlueprintCallable)
+	UTexture2D* CardTexture(int index);
 };

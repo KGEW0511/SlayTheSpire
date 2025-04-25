@@ -9,175 +9,14 @@ ACardManager::ACardManager()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	
 }
 
 // Called when the game starts or when spawned
 void ACardManager::BeginPlay()
 {
 	Super::BeginPlay();
-
-	AddCard(1);
-	AddCard(2);
-	AddCard(3);
-	AddCard(4);
-	AddCard(5);
-	AddCard(6);
-
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-
-	RemoveCard(4);
-	RemoveCard(5);
-	RemoveCard(6);
-	
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-
-	CardDrow();
-
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-	CardDrow();
-	
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-	
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-	
-	CardDrow();
-	
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-	
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-	
-	UseCard(0);
-	UseCard(0);
-	UseCard(0);
-	
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-	
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
-	
-	CardShuffle();
-	
-	{
-		for (int i = 0 ; i < DeckCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DeckCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DeckCards"));
-	
-		for (int i = 0 ; i < HandCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), HandCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("HandCards"));
-	
-		for (int i = 0 ; i < DiscardCards.Num(); i++)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("%d "), DiscardCards[i]);
-		}
-		UE_LOG(LogTemp, Warning, TEXT("DicardCards"));
-	}
+	CardDictionary.Add(1001, AttackCardTexture);
+	CardDictionary.Add(1002, ShieldCardTexture);
 }
 
 // Called every frame
@@ -216,6 +55,16 @@ void ACardManager::AddCard(int32 index)
 void ACardManager::RemoveCard(int32 index)
 {
 	DeckCards.RemoveSingle(index);
+}
+
+UTexture2D* ACardManager::CardTexture(int index)
+{
+	if (CardDictionary.Contains(index))
+	{
+		return CardDictionary[index];
+	}
+
+	return nullptr;
 }
 
 void ACardManager::UseCard(int32 index)
