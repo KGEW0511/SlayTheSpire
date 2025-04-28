@@ -15,8 +15,8 @@ ACardManager::ACardManager()
 void ACardManager::BeginPlay()
 {
 	Super::BeginPlay();
-	CardDictionary.Add(1001, AttackCardTexture);
-	CardDictionary.Add(1002, ShieldCardTexture);
+	CardDictionary.Add(1001, CardTextureArray[0]);
+	CardDictionary.Add(1002, CardTextureArray[1]);
 }
 
 // Called every frame
@@ -57,7 +57,7 @@ void ACardManager::RemoveCard(int32 index)
 	DeckCards.RemoveSingle(index);
 }
 
-UTexture2D* ACardManager::CardTexture(int index)
+UTexture2D* ACardManager::GetCardTexture(int index)
 {
 	if (CardDictionary.Contains(index))
 	{

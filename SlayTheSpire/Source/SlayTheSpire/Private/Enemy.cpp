@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "SlayTheSpire/Public/SlayPlayer.h"
+#include "Enemy.h"
 
 // Sets default values
-ASlayPlayer::ASlayPlayer()
+AEnemy::AEnemy()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,33 +12,20 @@ ASlayPlayer::ASlayPlayer()
 }
 
 // Called when the game starts or when spawned
-void ASlayPlayer::BeginPlay()
+void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ASlayPlayer::Tick(float DeltaTime)
+void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-void ASlayPlayer::Attack(int index, AEnemy* enemy)
-{
-	
-	UE_LOG(LogTemp, Warning, TEXT("%d"), index);
-	switch (index)
-	{
-	case 0:
-		break;
-	case 1:
-		break;
-	}
-}
-
-void ASlayPlayer::Damage(int value)
+void AEnemy::TakeDamage(float value)
 {
 	if (bIsDebuff)
 	{
@@ -47,11 +34,25 @@ void ASlayPlayer::Damage(int value)
 	}
 
 	CurHp -= value;
-
+	
 	if (CurHp <= 0)
 	{
 		CurHp = 0;
-		
+		Death();
+	}
+}
+
+void AEnemy::Death()
+{
+	this->Destroy();
+}
+
+void AEnemy::TurnOver()
+{
+	if (bIsDebuff)
+	{
+		DebuffDurationTurn -= 0;
+		if (DebuffDurationTurn <= 0) bIsDebuff = false;
 	}
 }
 

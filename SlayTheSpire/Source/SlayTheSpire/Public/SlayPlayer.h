@@ -22,5 +22,34 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere)
+	float CurHp;
+
+	UPROPERTY(EditAnywhere)
+	float MaxHp;
+
+	UPROPERTY(EditAnywhere)
+	float CurCost;
+
+	UPROPERTY(EditAnywhere)
+	float MaxCost;
+
+	UPROPERTY(EditAnywhere)
+	bool bIsBuff;
+
+	UPROPERTY(EditAnywhere)
+	int BuffDurationTurn;
+
+	UPROPERTY(EditAnywhere)
+	bool bIsDebuff;
+
+	UPROPERTY(EditAnywhere)
+	int DebuffDurationTurn;
 	
+	UFUNCTION()
+	void Attack(int index, AEnemy* enemy);
+
+	UFUNCTION()
+	void Damage(int value);
 };

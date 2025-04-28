@@ -44,13 +44,11 @@ public:
 	TArray<int32> DiscardCards;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* AttackCardTexture;
+	TArray<UTexture2D*> CardTextureArray;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* ShieldCardTexture;
-	
+	UPROPERTY()
 	TMap<int32, UTexture2D*> CardDictionary;
 
 	UFUNCTION(BlueprintCallable)
-	UTexture2D* CardTexture(int index);
+	UTexture2D* GetCardTexture(int index);
 };
