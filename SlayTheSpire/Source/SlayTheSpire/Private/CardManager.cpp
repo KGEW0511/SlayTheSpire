@@ -3,6 +3,8 @@
 
 #include "SlayTheSpire/Public/CardManager.h"
 
+#include "SlayPlayer.h"
+
 // Sets default values
 ACardManager::ACardManager()
 {
@@ -15,8 +17,14 @@ ACardManager::ACardManager()
 void ACardManager::BeginPlay()
 {
 	Super::BeginPlay();
-	CardDictionary.Add(1001, CardTextureArray[0]);
-	CardDictionary.Add(1002, CardTextureArray[1]);
+	
+	CardDictionary.Add(1001 ,FCardInfo{FString(TEXT("Attack")),CardTextureArray[0],ECardType::Attack,1});
+	CardDictionary.Add(1002 ,FCardInfo{FString(TEXT("Shield")),CardTextureArray[1],ECardType::Skill,1});
+	
+	AddCard(1001);
+	AddCard(1001);
+	AddCard(1002);
+	AddCard(1002);
 }
 
 // Called every frame
@@ -61,7 +69,7 @@ UTexture2D* ACardManager::GetCardTexture(int index)
 {
 	if (CardDictionary.Contains(index))
 	{
-		return CardDictionary[index];
+		return CardDictionary[index].CardImage;
 	}
 
 	return nullptr;

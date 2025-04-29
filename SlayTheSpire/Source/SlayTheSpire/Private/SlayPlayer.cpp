@@ -3,6 +3,10 @@
 
 #include "SlayTheSpire/Public/SlayPlayer.h"
 
+#include "CardManager.h"
+#include "Enemy.h"
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 ASlayPlayer::ASlayPlayer()
 {
@@ -25,15 +29,17 @@ void ASlayPlayer::Tick(float DeltaTime)
 
 }
 
-void ASlayPlayer::Attack(int index, AEnemy* enemy)
+void ASlayPlayer::Attack(int index)
 {
+	targetEnemy = cardManager->enemy;
 	
-	UE_LOG(LogTemp, Warning, TEXT("%d"), index);
 	switch (index)
 	{
-	case 0:
+	case 1001:
+		targetEnemy->TakeDamage(1);
 		break;
-	case 1:
+	case 1002:
+		targetEnemy->TakeDamage(1);
 		break;
 	}
 }

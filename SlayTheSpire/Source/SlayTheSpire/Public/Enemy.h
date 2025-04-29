@@ -32,9 +32,9 @@ public:
 	UFUNCTION()
 	void TurnOver();
 	
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	float CurHp;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	float MaxHp;
 	
 	bool bIsDebuff;

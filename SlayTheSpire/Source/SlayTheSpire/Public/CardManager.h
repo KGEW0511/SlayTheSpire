@@ -6,6 +6,25 @@
 #include "GameFramework/Actor.h"
 #include "CardManager.generated.h"
 
+UENUM()
+enum ECardType
+{
+	Attack,
+	Skill,
+	Power
+};
+
+USTRUCT()
+struct FCardInfo
+{
+	GENERATED_BODY()
+	
+	FString CardName;
+	UTexture2D* CardImage;
+	ECardType CardType;
+	int32 CardCost;
+};
+
 UCLASS()
 class SLAYTHESPIRE_API ACardManager : public AActor
 {
@@ -24,20 +43,23 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void CardShuffle();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void CardDrow();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void AddCard(int32 index);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void UseCard(int32 index);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void RemoveCard(int32 index);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class ASlayPlayer* player;
 	
 	TArray<int32> DeckCards;
 	TArray<int32> HandCards;
@@ -45,10 +67,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UTexture2D*> CardTextureArray;
-
-	UPROPERTY()
-	TMap<int32, UTexture2D*> CardDictionary;
+	
+	UPROPERTY(EditAnywhere)
+	TMap<int32, FCardInfo> CardDictionary;
 
 	UFUNCTION(BlueprintCallable)
 	UTexture2D* GetCardTexture(int index);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AEnemy* enemy;
 };

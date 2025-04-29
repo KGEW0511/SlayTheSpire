@@ -27,7 +27,7 @@ void AEnemy::Tick(float DeltaTime)
 
 void AEnemy::TakeDamage(float value)
 {
-	if (bIsDebuff)
+	if (true == bIsDebuff)
 	{
 		value *= 1.5f;
 		value = floor(value + 0.5f);
@@ -40,10 +40,13 @@ void AEnemy::TakeDamage(float value)
 		CurHp = 0;
 		Death();
 	}
+	UE_LOG(LogTemp, Warning, TEXT("%f"), CurHp);
 }
 
 void AEnemy::Death()
 {
+	UE_LOG(LogTemp, Warning, TEXT("%f"), CurHp);
+	
 	this->Destroy();
 }
 

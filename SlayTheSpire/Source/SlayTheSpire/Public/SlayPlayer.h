@@ -47,9 +47,15 @@ public:
 	UPROPERTY(EditAnywhere)
 	int DebuffDurationTurn;
 	
-	UFUNCTION()
-	void Attack(int index, AEnemy* enemy);
+	UFUNCTION(BlueprintCallable)
+	void Attack(int index);
 
 	UFUNCTION()
 	void Damage(int value);
+
+	UPROPERTY(EditAnywhere)
+	class AEnemy* targetEnemy;
+
+	UPROPERTY(EditAnywhere)
+	class ACardManager* cardManager;
 };
