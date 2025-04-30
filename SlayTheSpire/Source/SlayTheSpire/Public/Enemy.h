@@ -40,4 +40,10 @@ public:
 	bool bIsDebuff;
 	
 	int32 DebuffDurationTurn;
+
+	UPROPERTY(EditAnywhere)
+	class UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* hpBar;
 };

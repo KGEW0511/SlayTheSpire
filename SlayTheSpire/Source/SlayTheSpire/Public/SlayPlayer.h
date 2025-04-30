@@ -58,4 +58,13 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	class ACardManager* cardManager;
+
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* hpBar;
+	
+	UPROPERTY(EditAnywhere)
+	class UUserWidget* HUD;
+
+	UPROPERTY(EditAnywhere)
+	class UStaticMeshComponent* MeshComp;
 };
