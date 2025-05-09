@@ -26,4 +26,5 @@ void UEnemyHpBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 	
 	curHpText->SetText(FText::AsNumber(enemy->CurHp));
 	maxHpText->SetText(FText::AsNumber(enemy->MaxHp));
+	
 }

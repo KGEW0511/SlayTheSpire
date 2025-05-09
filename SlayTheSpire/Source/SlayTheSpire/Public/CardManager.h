@@ -4,15 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "SlayTheSpire/SlayTheSpire.h"
 #include "CardManager.generated.h"
-
-UENUM()
-enum ECardType
-{
-	Attack,
-	Skill,
-	Power
-};
 
 USTRUCT()
 struct FCardInfo
@@ -43,20 +36,23 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void CardShuffle();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void CardDrow();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void AddCard(int32 index);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void UseCard(int32 index);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void RemoveCard(int32 index);
+
+	UFUNCTION(BlueprintCallable)
+	void TurnOver();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class ASlayPlayer* player;
@@ -70,10 +66,16 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	TMap<int32, FCardInfo> CardDictionary;
+	
+	UFUNCTION()
+	FCardInfo GetCard(int index);
 
-	UFUNCTION(BlueprintCallable)
-	UTexture2D* GetCardTexture(int index);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AEnemy* targetEnemy;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AEnemy* enemy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ECardType cardType;
 };

@@ -3,7 +3,9 @@
 
 #include "SlayTheSpire/Public/CardManager.h"
 
+#include "Enemy.h"
 #include "SlayPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ACardManager::ACardManager()
@@ -19,12 +21,16 @@ void ACardManager::BeginPlay()
 	Super::BeginPlay();
 	
 	CardDictionary.Add(1001 ,FCardInfo{FString(TEXT("Attack")),CardTextureArray[0],ECardType::Attack,1});
-	CardDictionary.Add(1002 ,FCardInfo{FString(TEXT("Shield")),CardTextureArray[1],ECardType::Skill,1});
+	CardDictionary.Add(1002 ,FCardInfo{FString(TEXT("Shield")),CardTextureArray[1],ECardType::Skill,2});
 	
 	AddCard(1001);
 	AddCard(1001);
 	AddCard(1002);
 	AddCard(1002);
+
+	CardDrow();
+	CardDrow();
+	CardDrow();
 }
 
 // Called every frame
@@ -51,6 +57,11 @@ void ACardManager::CardShuffle()
 
 void ACardManager::CardDrow()
 {
+	if (DeckCards.Num() == 0)
+	{
+		CardShuffle();
+	}
+	
 	HandCards.Add(DeckCards[0]);
 	DeckCards.RemoveAt(0);
 }
@@ -65,18 +76,46 @@ void ACardManager::RemoveCard(int32 index)
 	DeckCards.RemoveSingle(index);
 }
 
-UTexture2D* ACardManager::GetCardTexture(int index)
+void ACardManager::TurnOver()
 {
-	if (CardDictionary.Contains(index))
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),AEnemy::StaticClass(),actors);
+
+	for (AActor* actor : actors)
 	{
-		return CardDictionary[index].CardImage;
+		enemy = Cast<AEnemy>(actor);
+		if (enemy)
+		{
+			enemy->Attack(player);
+		}
 	}
 
-	return nullptr;
+	player-> CurCost = player-> MaxCost;
+}
+
+FCardInfo ACardManager::GetCard(int index)
+{
+	return CardDictionary[HandCards[index]];
 }
 
 void ACardManager::UseCard(int32 index)
 {
+	if (player->CurCost < CardDictionary[HandCards[index]].CardCost)
+		return;
+	
+	switch (cardType)
+	{
+		case ECardType::Attack:
+
+		if (nullptr == targetEnemy)
+			return;
+		
+		case ECardType::Skill:
+		case ECardType::Power:
+		player->Attack(HandCards[index]);
+		break;
+	}
+
 	DiscardCards.Add(HandCards[index]);
 	HandCards.RemoveSingle(HandCards[index]);
 }

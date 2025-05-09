@@ -4,3 +4,10 @@
 
 #include "CoreMinimal.h"
 
+UENUM()
+enum class ECardType
+{
+	Attack,
+	Skill,
+	Power
+};

@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Enemy.generated.h"
 
+class ASlayPlayer;
+
 UCLASS()
 class SLAYTHESPIRE_API AEnemy : public AActor
 {
@@ -24,13 +26,16 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UFUNCTION(BlueprintCallable)
-	void TakeDamage(float value);
+	UFUNCTION()
+	void OnTakeDamage(float value);
 
 	void Death();
 	
 	UFUNCTION()
 	void TurnOver();
+	
+	UFUNCTION()
+	void Attack(ASlayPlayer* player);
 	
 	UPROPERTY(EditAnywhere)
 	float CurHp;
@@ -46,4 +51,14 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	class UWidgetComponent* hpBar;
+
+	UPROPERTY(EditAnywhere)
+	TArray<int32> AttackPartern;
+
+	UPROPERTY(EditAnywhere)
+	int32 TurnIndex;
+
+	void Charge();
+
+	void MagicAttack(ASlayPlayer* player);
 };

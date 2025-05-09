@@ -4,6 +4,7 @@
 #include "Enemy.h"
 
 #include "EnemyHpBar.h"
+#include "SlayPlayer.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -45,7 +46,7 @@ void AEnemy::Tick(float DeltaTime)
 
 }
 
-void AEnemy::TakeDamage(float value)
+void AEnemy::OnTakeDamage(float value)
 {
 	if (true == bIsDebuff)
 	{
@@ -60,13 +61,10 @@ void AEnemy::TakeDamage(float value)
 		CurHp = 0;
 		Death();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("%f"), CurHp);
 }
 
 void AEnemy::Death()
 {
-	UE_LOG(LogTemp, Warning, TEXT("%f"), CurHp);
-	
 	this->Destroy();
 }
 
@@ -77,5 +75,30 @@ void AEnemy::TurnOver()
 		DebuffDurationTurn -= 0;
 		if (DebuffDurationTurn <= 0) bIsDebuff = false;
 	}
+}
+
+void AEnemy::Attack(ASlayPlayer* player)
+{
+	switch (AttackPartern[TurnIndex % AttackPartern.Num()])
+	{
+		case 0:
+		Charge();
+		break;
+		case 1:
+		MagicAttack(player);
+		break;
+	}
+	TurnIndex++;
+	TurnOver();
+}
+
+void AEnemy::Charge()
+{
+	DrawDebugString(GetWorld(), GetActorLocation(), TEXT("Charge"), nullptr ,FColor::Red, 1, true, 1);
+}
+
+void AEnemy::MagicAttack(ASlayPlayer* player)
+{
+	player->CurHp -= 3;
 }
 
