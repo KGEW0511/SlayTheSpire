@@ -17,12 +17,12 @@ class SLAYTHESPIRE_API UDragWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY()
 	UUserWidget* WidgetReference;
 
-	UPROPERTY(EditAnywhere)
-	class UImage* CardImage;
+	UPROPERTY(meta=(BindWidget))
+	class UImage* CardAfterImage;
 
-	UPROPERTY(EditAnywhere)
-	class USizeBox* WidgetSizeBox;
+	UPROPERTY(meta=(BindWidget))
+	class USizeBox* WidgetSize;
 };

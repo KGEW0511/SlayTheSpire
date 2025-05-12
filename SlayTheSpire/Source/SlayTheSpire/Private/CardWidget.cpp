@@ -37,7 +37,7 @@ void UCardWidget::NativeConstruct()
 FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
-
+	
 	DragOffset = USlateBlueprintLibrary::AbsoluteToLocal
 	(InGeometry, UKismetInputLibrary::PointerEvent_GetScreenSpacePosition(InMouseEvent));
 	
@@ -51,11 +51,12 @@ void UCardWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPoint
 
 	auto* image = Cast<UTexture2D>(CardImage->GetBrush().GetResourceObject());
 	
-	DragWidget = CreateWidget<UDragWidget>(UDragWidget::StaticClass());
-	DragWidget->CardImage->SetBrush(UWidgetBlueprintLibrary::MakeBrushFromTexture(image, 200.f, 200.f));
-
-	auto* DragAndDropClass = UWidgetBlueprintLibrary::CreateDragDropOperation(UCardDrag::StaticClass());
-	DragAndDropClass->DefaultDragVisual = DragWidget;
-	Cast<UCardDrag>(DragAndDropClass)->DragOffset = DragOffset;
-	Cast<UCardDrag>(DragAndDropClass)->CardIndex = CardIndex;
+	DragWidget = CreateWidget<UDragWidget>(this,CardWidgetClass);
+	DragWidget->AddToViewport();
+	DragWidget->CardAfterImage->SetBrush(UWidgetBlueprintLibrary::MakeBrushFromTexture(image, 200.f, 200.f));
+	
+	CardDrag = NewObject<UCardDrag>();
+	CardDrag->DefaultDragVisual = DragWidget;
+	CardDrag->DragOffset = DragOffset;
+	CardDrag->CardIndex = CardIndex;
 }

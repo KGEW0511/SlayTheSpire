@@ -35,6 +35,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FVector2D DragOffset;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UDragWidget> CardWidgetClass;
 	
 	UPROPERTY(EditAnywhere)
 	class UDragWidget* DragWidget;
@@ -44,4 +47,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	class UTexture2D* CurCardTexture;
+
+	UPROPERTY(EditAnywhere)
+	class UCardDrag* CardDrag;
 };
