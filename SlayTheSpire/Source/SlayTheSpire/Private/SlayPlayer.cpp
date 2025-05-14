@@ -50,11 +50,10 @@ void ASlayPlayer::Tick(float DeltaTime)
 
 void ASlayPlayer::Attack(int index)
 {
-	targetEnemy = cardManager->targetEnemy;
-	
 	switch (index)
 	{
 	case 1001:
+		targetEnemy = cardManager->targetEnemy;
 		targetEnemy->OnTakeDamage(1);
 		break;
 	case 1002:

@@ -54,7 +54,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TurnOver();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 	class ASlayPlayer* player;
 	
 	TArray<int32> DeckCards;

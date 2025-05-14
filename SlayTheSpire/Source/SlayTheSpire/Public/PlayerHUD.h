@@ -30,4 +30,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	int32 CardIndex;
+
+	UPROPERTY(EditAnywhere)
+	class ACardManager* cardManager;
 };

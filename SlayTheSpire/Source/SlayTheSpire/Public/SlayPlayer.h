@@ -47,7 +47,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	int DebuffDurationTurn;
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void Attack(int index);
 
 	UFUNCTION()

@@ -58,14 +58,13 @@ void UCardWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPoint
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
 
 	auto* image = Cast<UTexture2D>(CardImage->GetBrush().GetResourceObject());
-	
 	DragWidget = CreateWidget<UDragWidget>(this,CardWidgetClass);
+	DragWidget->CardAfterImage->SetBrushFromTexture(image);
+	DragWidget->CardAfterImage->SetDesiredSizeOverride(FVector2D(200.f, 200.f));
 	
 	CardDrag = NewObject<UCardDrag>();
-	CardDrag->DefaultDragVisual = this;
-	CardDrag->DragOffset = DragOffset;
+	CardDrag->DefaultDragVisual = DragWidget;
 	CardDrag->CardIndex = CardIndex;
 	CardDrag->WidgetReference = DragWidget;
 	OutOperation = CardDrag;
-	UE_LOG(LogTemp, Warning, TEXT("Detected"));
 }

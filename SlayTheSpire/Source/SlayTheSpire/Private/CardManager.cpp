@@ -103,19 +103,7 @@ void ACardManager::UseCard(int32 index)
 	if (player->CurCost < CardDictionary[HandCards[index]].CardCost)
 		return;
 	
-	switch (cardType)
-	{
-		case ECardType::Attack:
-
-		if (nullptr == targetEnemy)
-			return;
-		
-		case ECardType::Skill:
-		case ECardType::Power:
-		player->Attack(HandCards[index]);
-		break;
-	}
-
+	player->Attack(HandCards[index]);
 	DiscardCards.Add(HandCards[index]);
 	HandCards.RemoveSingle(HandCards[index]);
 }
