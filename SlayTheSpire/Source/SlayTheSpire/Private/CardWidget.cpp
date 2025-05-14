@@ -44,19 +44,28 @@ FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const F
 	return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, EKeys::LeftMouseButton).NativeReply;
 }
 
+FReply UCardWidget::NativeOnPreviewMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	//Super::NativeOnPreviewMouseButtonDown(InGeometry, InMouseEvent);
+
+	FReply reply = NativeOnMouseButtonDown(InGeometry, InMouseEvent);
+	return reply;
+}
+
 void UCardWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent,
-	UDragDropOperation*& OutOperation)
+                                       UDragDropOperation*& OutOperation)
 {
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
 
 	auto* image = Cast<UTexture2D>(CardImage->GetBrush().GetResourceObject());
 	
 	DragWidget = CreateWidget<UDragWidget>(this,CardWidgetClass);
-	DragWidget->AddToViewport();
-	DragWidget->CardAfterImage->SetBrush(UWidgetBlueprintLibrary::MakeBrushFromTexture(image, 200.f, 200.f));
 	
 	CardDrag = NewObject<UCardDrag>();
-	CardDrag->DefaultDragVisual = DragWidget;
+	CardDrag->DefaultDragVisual = this;
 	CardDrag->DragOffset = DragOffset;
 	CardDrag->CardIndex = CardIndex;
+	CardDrag->WidgetReference = DragWidget;
+	OutOperation = CardDrag;
+	UE_LOG(LogTemp, Warning, TEXT("Detected"));
 }

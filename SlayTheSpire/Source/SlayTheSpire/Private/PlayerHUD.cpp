@@ -26,7 +26,12 @@ bool UPlayerHUD::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent&
 {
 	Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
 
-	CardIndex = Cast<UCardDrag>(InOperation)->CardIndex;
+	auto* io = Cast<UCardDrag>(InOperation);
+
+	UE_LOG(LogTemp, Warning, TEXT("Droped"));
+	
+	CardIndex = io->CardIndex;
+	io->WidgetReference->RemoveFromParent();
 
 	FTimerHandle TimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle,
@@ -37,6 +42,8 @@ bool UPlayerHUD::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent&
 			CardManager->GetCard(CardIndex);
 		}
 		,0.1f ,false);
-
+	
+	
+	
 	return true;
 }

@@ -12,11 +12,6 @@ void UDragWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	// CardAfterImage = Cast<UImage>(GetWidgetFromName(TEXT("CardAfterImage")));
-	// WidgetSize = Cast<USizeBox>(GetWidgetFromName(TEXT("WidgetSize")));
-
-	//FVector2D size = Cast<UCardWidget>(WidgetReference)->GetDesiredSize();
-
 	WidgetSize->SetWidthOverride(200.f);
 	WidgetSize->SetHeightOverride(200.f);
 }
